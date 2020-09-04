@@ -10,6 +10,5 @@ def main():
     p = getPhish(1511111)
     print(p)
 
-
 if __name__ == '__main__':
     main()

@@ -44,6 +44,7 @@ def _getPhishURL(webContent):
     soup = BeautifulSoup(webContent, 'html.parser')
     return soup.select("span b")[1].text
 
+# To get verify of the phish web.
 def _getPhishVerify(webContent):
     soup = BeautifulSoup(webContent, 'html.parser')
     verifySentence = soup.h3.text
@@ -56,10 +57,8 @@ def _getPhishVerify(webContent):
 
 def _checkURLExist(webContent):
     if _getPhishStateSentence(webContent).find("Submission") > 0:
-        # print("URL existed.")
         return True
     else:
-        # print("URL not exist.")
         return False
 
 def getPhish(phishID):
@@ -68,13 +67,19 @@ def getPhish(phishID):
         webContent = _getPhishDetail(phishID)
     except requests.exceptions.Timeout as e:
         # Maybe set up for a retry, or continue in a retry loop
-        raise SystemExit(e)
+        # raise SystemExit(e)
+        print(e)
+        return tempPhish
     except requests.exceptions.TooManyRedirects as e:
         # Tell the user their URL was bad and try a different one
-        raise SystemExit(e)
+        # raise SystemExit(e)
+        print(e)
+        return tempPhish
     except requests.exceptions.RequestException as e:
         # catastrophic error. bail.
-        raise SystemExit(e)
+        # raise SystemExit(e)
+        print(e)
+        return tempPhish
     if _checkURLExist(webContent):
         # print(getPhishURL(webContent))
         tempPhish.url = _getPhishURL(webContent)
