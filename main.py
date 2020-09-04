@@ -1,12 +1,14 @@
 # !usr/bin/python
 # -*- coding:utf-8 -*-
+from phish import Phish as Phish
 import requests
 from bs4 import BeautifulSoup
 
+URL = "https://www.phishtank.com/phish_detail.php?phish_id="
+
 # To get a webpage.
 def getPhishDetail(phishID):
-    url = "https://www.phishtank.com/phish_detail.php?phish_id="
-    res = requests.get(url+phishID)
+    res = requests.get(URL+phishID)
     return res.text
 
 def getPhishState(webContent):
@@ -38,8 +40,11 @@ def main(phishID):
         # catastrophic error. bail.
         raise SystemExit(e)
     if checkURLExist(webContent):
-        print(getPhishURL(webContent))
+        # print(getPhishURL(webContent))
+        return getPhishURL(webContent)
 
 if __name__ == '__main__':
-    main("0")
-    main("15")
+    # main("0")
+    # main("15")
+    p = Phish(15, url=main("15"))
+    print(p)
