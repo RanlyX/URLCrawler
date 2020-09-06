@@ -1,14 +1,15 @@
 # !usr/bin/python
 # -*- coding:utf-8 -*-
-
-import requests
-from bs4 import BeautifulSoup
-from phish import Phish as Phish
-from phish import getPhish as getPhish
+import sys
+from task import *
+from phish import *
 
 def main():
-    p = getPhish(1511111)
-    print(p)
+    for i in range(1,10001):
+        t = Task(id_=i, phish=Phish(i)).getPhish()
+        print(t)
+        # p = getPhish(i)
+        # print(p)
 
 if __name__ == '__main__':
     main()
