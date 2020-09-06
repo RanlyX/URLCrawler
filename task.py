@@ -8,7 +8,6 @@ __all__ = ['Task']
 
 # The URL of PhishTank about reported suspicious website.
 URL = "https://www.phishtank.com/phish_detail.php?phish_id="
-AUTH = "&__cf_chl_captcha_tk__=56d5112d7443999149fc19bc53d4863b06052743-1599304807-0-AezTxSx6i8iQan_CHS1lRxBRrWtgjzWAGlLxo-CmyxIXf6QSHj_Maso356g4M02kycVt8RYwLrX6ZSalf-ecaY5R89eFCEXQr6NAQGB30XB5jxPCVWa2W6RQDn8ztZU0-EMUbn-CHwiztkkFk8XmYk2MzOYRDJa-B6AsrgBiFUTsJZ5etEM7Ku188cbrKohvYzOM3Y16WXakMEsqmAbZ0ES0zKhDSMGZTZZ1k3eeCDZ9cBqPnkS0VOidwKZudPlYAdp9aP7wpGEe__mQwgHVNpdEfmR_NX6NXTaqEOmFKw9t-J-WXvPnPVef60KJyg1r94i2hF0BxQcTdT28vY0UASzyq-VMx2hOseWWlFWOxmO74080EjNtE8hOL0lKwjn5HPrYxJnQX2G9BHv-nXGV97Du0chR1cie0kpOMcEhZu5CVIwXrx0NgQGHFyhMQN9FEfcssrJdIyCOOfDOhatPmt5-jzNm_qRuYgMJapavDcTQTIpwWzDn--RUY1lvmGS3EHIfQy_lI2uhnWjYJXFaIuz0p_rQWBtgWrYJ7gHmQWSfZ21BdAxwyJejJcZhLhDnyuVHZVNshLCUdNZLn8zVkcc"
 # To get a webpage content.
 def _getPhishDetail(phishID):
     # Force change type to string type
