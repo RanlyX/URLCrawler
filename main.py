@@ -5,11 +5,11 @@ from task import *
 from phish import *
 
 def main():
-    for i in range(1,10001):
-        t = Task(id_=i, phish=Phish(i)).getPhish()
-        print(t)
-        # p = getPhish(i)
-        # print(p)
+    for id_, ptid in enumerate(range(2,3)):
+        t = Task(id_=id_, phish=Phish(ptid)).getPhish()
+        # print(t)
+        p = t.phish
+        print(p)
 
 if __name__ == '__main__':
     main()
