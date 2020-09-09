@@ -2,6 +2,7 @@
 # -*- coding:utf-8 -*-
 import os
 
+__all__ = ['checkPathExist', 'checkFileExist', 'checkIsLink', 'checkIsDir', 'makeDir']
 
 def checkPathExist(path):
     if os.path.exists(path):
@@ -27,5 +28,5 @@ def checkIsDir(dirPath):
     else:
         return False
 
-def makeIsDir(dirPath):
+def makeDir(dirPath):
     os.makedirs(dirPath)
