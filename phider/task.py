@@ -1,7 +1,7 @@
 # !usr/bin/python
 # -*- coding:utf-8 -*-
 
-import util.jsonio as jio
+import util.config as config
 import random
 import requests
 from bs4 import BeautifulSoup
@@ -13,7 +13,7 @@ URL = "https://www.phishtank.com/phish_detail.php?phish_id="
 CONFIG_PATH = "config.json"
 
 def _getConfig():
-    return jio.readJson(CONFIG_PATH)
+    return config.getConfig(CONFIG_PATH)
 
 # To get a webpage content.
 def _getPhishDetail(phishID, cookies):
@@ -104,7 +104,14 @@ class Task():
         tempPhish = self.phish
         try:
             webContent = _getPhishDetail(tempPhish.ptid, self.cookies)
-            # print(webContent)
+            if _checkURLExist(webContent):
+                url = _getPhishURL(webContent)
+                tempPhish.url = url.encode('utf-8')
+                tempPhish.time = _getPhishTime(webContent)
+                tempPhish.state = _getPhishState(webContent)
+                tempPhish.verify = _getPhishVerify(webContent)
+            
+            self.success = True
         except requests.exceptions.Timeout as e:
             # Maybe set up for a retry, or continue in a retry loop
             # raise SystemExit(e)
@@ -119,15 +126,16 @@ class Task():
             # catastrophic error. bail.
             # raise SystemExit(e)
             print(e)
+        except Exception as e:
+            print(e)
             # return tempPhish
-        if _checkURLExist(webContent):
-            url = _getPhishURL(webContent)
-            tempPhish.url = url.encode('utf-8')
-            tempPhish.time = _getPhishTime(webContent)
-            tempPhish.state = _getPhishState(webContent)
-            tempPhish.verify = _getPhishVerify(webContent)
         self.phish = tempPhish
-        self.success = True
         return self
+    
+    def getMax(self):
+		res = requests.get("https://www.phishtank.com/phish_search.php?verified=u&active=y")
+		soup = BeautifulSoup(res.text, "lxml")
+		maxSize = int(soup.select("td")[0].text)
+		return maxSize
     
     
