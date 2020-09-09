@@ -1,7 +1,7 @@
 # !usr/bin/python
 # -*- coding:utf-8 -*-
 
-import util.util as util
+import util.jsonio as jio
 import random
 import requests
 from bs4 import BeautifulSoup
@@ -13,7 +13,7 @@ URL = "https://www.phishtank.com/phish_detail.php?phish_id="
 CONFIG_PATH = "config.json"
 
 def _getConfig():
-    return util.readJson(CONFIG_PATH)
+    return jio.readJson(CONFIG_PATH)
 
 # To get a webpage content.
 def _getPhishDetail(phishID, cookies):
@@ -41,7 +41,7 @@ def _getPhishDetail(phishID, cookies):
 
     # Send request to get webpage content
     res = requests.get(URL+strPhishID, proxies=proxies)
-    print(res.cookies)
+    # print(res.cookies)
     return res.text
 
 # To get the phish web state content.
@@ -104,7 +104,7 @@ class Task():
         tempPhish = self.phish
         try:
             webContent = _getPhishDetail(tempPhish.ptid, self.cookies)
-            print(webContent)
+            # print(webContent)
         except requests.exceptions.Timeout as e:
             # Maybe set up for a retry, or continue in a retry loop
             # raise SystemExit(e)
