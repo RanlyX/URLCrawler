@@ -3,7 +3,7 @@
 
 import phider.task as mtk
 import phider.phish as mp
-import phider.worker as wk
+# import phider.worker as wk
 import phider.task_manager as mtm
 
 def main():

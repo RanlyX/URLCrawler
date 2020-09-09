@@ -40,9 +40,13 @@ class TaskManager():
         
         for id_, ptid in enumerate(ptids):
             pool.apply_async(run, args=(self, id_, ptid, total))
-            
         pool.close()
         pool.join()
+        while True:
+            chioce = raw_input('Enter your input:')
+            if chioce.lower() == "exit":
+                break
+
         bar.finish()
 
     def jobs(self, id_, ptid, total):
