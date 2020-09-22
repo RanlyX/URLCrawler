@@ -1,3 +1,7 @@
 *.pyc
+__pycache__/*
 chromedriver*
+Makefile
+docker*
+.docker*
 setup.sh
